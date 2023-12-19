@@ -1,0 +1,115 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ps-cancellation api",
+        "version": "1.0.0",
+        "description": "This is the cancellation api for the ps-cancellation service",
+        "contact": {
+            "email": "SPRINGPremiumServices-og@moveoffice.com"
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "123"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "age": {
+                        "type": "number",
+                        "example": 42
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "age"
+                ]
+            }
+        },
+        "parameters": {}
+    },
+    "paths": {
+        "/users/{id}": {
+            "get": {
+                "description": "Retrieve a user by its id",
+                "summary": "Retrieve a user",
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "example": "123"
+                        },
+                        "required": true,
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "minLength": 3,
+                            "example": "John Doe"
+                        },
+                        "required": true,
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieve the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
